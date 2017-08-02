@@ -20,7 +20,7 @@ devices = [0,1,2,3]
 ngpu = len(devices)
 cublasxt.cublasXtDeviceSelect(ngpu,
                               devices)
-``
+``'
 
 The cublasxt object above can now be used to access all the functions in the [CublasXt Math API](http://docs.nvidia.com/cuda/cublas/index.html#unique_1440937429)
 Additionally, the cublasXtSetBlockDim is also exposed. For best performance, this function should be called with an appropriate block size before invoking any
