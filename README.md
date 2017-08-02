@@ -1,5 +1,5 @@
 # pycublasxt
-This package provides a python interface for the [NVIDIA CublasXt package](http://docs.nvidia.com/cuda/cublas/index.html#using-the-cublasXt-api)
+This package provides a python interface for the [NVIDIA CublasXt API](http://docs.nvidia.com/cuda/cublas/index.html#using-the-cublasXt-api)
 
 # Installation
 1) Make sure the latest version of the CUDA TOOLKIT is installed
@@ -26,9 +26,10 @@ The cublasxt object above can now be used to access all the functions in the [Cu
 Additionally, the cublasXtSetBlockDim is also exposed. For best performance, this function should be called with an appropriate block size before invoking any
 CublasXt Math functions.
 
-For all methods, you do not have to provide the first argument (handle). The package takes care of creating and destroying the handle.
+You do not have to provide the first argument (handle) for all the exposed functions. The package takes care of creating and destroying the handle and
+providing the same to all the methods.
 
-The following [CublasXt datatype constants](http://docs.nvidia.com/cuda/cublas/index.html#cublas-datatypes-reference) are can also be accessed through the instantiated object.
+The following [CublasXt datatype constants](http://docs.nvidia.com/cuda/cublas/index.html#cublas-datatypes-reference) can also be accessed through the instantiated object.
 
 ```python
 cublasxt._CUBLAS_OP['N']
@@ -56,7 +57,7 @@ cublasxt._CUBLAS_DIAG['n']
 
 # Example
 
-## Comparing symm with np.dot
+## Comparing cublasXt<t>symm with np.dot
 ```python
 from __future__ import print_function
 import numpy as np
