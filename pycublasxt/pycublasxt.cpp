@@ -18,7 +18,6 @@
 
 // TODO: Error messages from status
 // TODO: Documentation
-// TODO: Python 3 Support
 
 using namespace std;
 
@@ -130,7 +129,7 @@ cublasXt_free(cublasXt* self, PyObject *args)
     }
     it++;
   }
-  return PyInt_FromLong(ret);
+  return PyLong_FromLong(ret);
 
 }
 
@@ -138,14 +137,14 @@ static PyObject *
 cublasXt_free_all(cublasXt* self, PyObject *args)
 {
   free_all(self);
-  return PyInt_FromLong(0);
+  return PyLong_FromLong(0);
 }
 */
 static PyObject *
 cublasXt_finalize(cublasXt* self, PyObject *args)
 {
   finalize(self);
-  return PyInt_FromLong(0);
+  return PyLong_FromLong(0);
 }
 
 
@@ -153,9 +152,9 @@ static PyObject *
 cublasXt_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 {
   cublasXt *self;
-  PyObject* zero = PyInt_FromLong(0);
-  PyObject* one = PyInt_FromLong(1);
-  PyObject* two = PyInt_FromLong(2);
+  PyObject* zero = PyLong_FromLong(0);
+  PyObject* one = PyLong_FromLong(1);
+  PyObject* two = PyLong_FromLong(2);
   
   self = (cublasXt *)type->tp_alloc(type, 0);
   self->_CUBLAS_OP = PyDict_New();
@@ -217,7 +216,7 @@ cublasXt_deviceSelect(cublasXt* self, PyObject *args)
   PyObject* temp;
   for(int i=0 ; i<ngpu ; i++ ){
     temp = PySequence_GetItem(pyDevices, i);
-    devices[i] = (int) PyInt_AsLong(temp);
+    devices[i] = (int) PyLong_AsLong(temp);
     Py_XDECREF(temp);
   }
   self->status  = cublasXtDeviceSelect(self->handle, ngpu, devices);
@@ -226,7 +225,7 @@ cublasXt_deviceSelect(cublasXt* self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -244,7 +243,7 @@ cublasXt_setBlockDim(cublasXt* self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 /*
@@ -340,7 +339,7 @@ cublasXt_Sgemm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -395,7 +394,7 @@ cublasXt_Dgemm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -452,7 +451,7 @@ cublasXt_Cgemm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -509,7 +508,7 @@ cublasXt_Zgemm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 
@@ -565,7 +564,7 @@ cublasXt_Chemm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -621,7 +620,7 @@ cublasXt_Zhemm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -674,7 +673,7 @@ cublasXt_Ssymm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -727,7 +726,7 @@ cublasXt_Dsymm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -782,7 +781,7 @@ cublasXt_Csymm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -837,7 +836,7 @@ cublasXt_Zsymm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -884,7 +883,7 @@ cublasXt_Ssyrk(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -931,7 +930,7 @@ cublasXt_Dsyrk(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -980,7 +979,7 @@ cublasXt_Csyrk(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1029,7 +1028,7 @@ cublasXt_Zsyrk(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, "CUBLAS_ERRORS[self->status]");
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1082,7 +1081,7 @@ cublasXt_Ssyr2k(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1135,7 +1134,7 @@ cublasXt_Dsyr2k(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1190,7 +1189,7 @@ cublasXt_Csyr2k(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1246,7 +1245,7 @@ cublasXt_Zsyr2k(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1299,7 +1298,7 @@ cublasXt_Ssyrkx(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1352,7 +1351,7 @@ cublasXt_Dsyrkx(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1407,7 +1406,7 @@ cublasXt_Csyrkx(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1463,7 +1462,7 @@ cublasXt_Zsyrkx(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, "!!!! CUBLASXT Error \n");
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1510,7 +1509,7 @@ cublasXt_Cherk(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1557,7 +1556,7 @@ cublasXt_Zherk(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, "CUBLAS_ERRORS[self->status]");
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 
@@ -1613,7 +1612,7 @@ cublasXt_Cher2k(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1669,7 +1668,7 @@ cublasXt_Zher2k(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1724,7 +1723,7 @@ cublasXt_Cherkx(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1780,7 +1779,7 @@ cublasXt_Zherkx(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, "!!!! CUBLASXT Error \n");
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1832,7 +1831,7 @@ cublasXt_Strsm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1882,7 +1881,7 @@ cublasXt_Dtrsm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1933,7 +1932,7 @@ cublasXt_Ctrsm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -1986,7 +1985,7 @@ cublasXt_Ztrsm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -2043,7 +2042,7 @@ cublasXt_Strmm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -2100,7 +2099,7 @@ cublasXt_Dtrmm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -2156,7 +2155,7 @@ cublasXt_Ctrmm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -2215,7 +2214,7 @@ cublasXt_Ztrmm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -2266,7 +2265,7 @@ cublasXt_Sspmm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -2317,7 +2316,7 @@ cublasXt_Dspmm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -2370,7 +2369,7 @@ cublasXt_Cspmm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyObject *
@@ -2423,7 +2422,7 @@ cublasXt_Zspmm(cublasXt *self, PyObject *args)
     PyErr_SetString(PyExc_RuntimeError, CUBLAS_ERRORS[self->status]);
     return NULL;
   }
-  return PyInt_FromLong(self->status);
+  return PyLong_FromLong(self->status);
 }
 
 static PyMethodDef cublasXt_methods[] = {
