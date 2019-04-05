@@ -14,6 +14,8 @@ python setup.py install
 An instance of pycublasxt.CublasXt needs to be created and be used to specify the devices first.
 ```python
 from pycublasxt import CublasXt
+cublasxt = CublasXt()
+
 cublasxt.CublasXt()
 
 devices = [0,1,2,3]
